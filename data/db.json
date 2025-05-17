@@ -1,0 +1,60 @@
+{
+  "complaints": [
+    {
+      "id": "da71",
+      "title": "Electricity",
+      "description": "Electricity shortage",
+      "category": "Electricity",
+      "email": "irafasha.jedy12@gmail.com",
+      "contact": "0780689938",
+      "province": "South",
+      "district": "Muhanga",
+      "sector": "Muhanga",
+      "cell": "Nganzo",
+      "village": "Gasenyi",
+      "status": "Submitted"
+    },
+    {
+      "id": "8ea7",
+      "title": "Electricity",
+      "description": "Electricity shortage",
+      "category": "Electricity",
+      "email": "irafasha.jedy12@gmail.com",
+      "contact": "0780689938",
+      "province": "South",
+      "district": "Muhanga",
+      "sector": "Muhanga",
+      "cell": "Nganzo",
+      "village": "Gasenyi",
+      "status": "In Progress"
+    },
+    {
+      "id": "f8b2",
+      "title": "Electricity",
+      "description": "Electricity shortage",
+      "category": "Electricity",
+      "email": "irafasha.jedy12@gmail.com",
+      "contact": "0780689938",
+      "province": "South",
+      "district": "Muhanga",
+      "sector": "Muhanga",
+      "cell": "Nganzo",
+      "village": "Gasenyi",
+      "status": "Submitted"
+    },
+    {
+      "id": "71d8",
+      "title": "Electricity",
+      "description": "Electricity shortage",
+      "category": "Electricity",
+      "email": "irafasha.jedy12@gmail.com",
+      "contact": "0780689938",
+      "province": "South",
+      "district": "Muhanga",
+      "sector": "Muhanga",
+      "cell": "Nganzo",
+      "village": "Gasenyi",
+      "status": "Submitted"
+    }
+  ]
+}

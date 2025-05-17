@@ -1,0 +1,70 @@
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@layer base {
+    html {
+      font-family: 'Open Sans', sans-serif;
+
+    }
+}
+
+@layer utilities {
+  * {
+    box-sizing: border-box;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 3px;
+    position: relative;
+  }
+   
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background-color: #047857;
+    outline: 1px solid #d1d5db;
+  }
+
+  .owl-carousel .owl-prev.disabled,
+  .owl-carousel .owl-next.disabled{
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  .owl-carousel-vertical{
+    transform: rotate(90deg);
+    margin-top: 100px;
+  }
+  .item-vertical{
+    transform: rotate(-90deg);
+  }
+
+  .quill {
+    position: relative;
+  }
+  
+  .ql-toolbar {
+    position: sticky;
+    top: 0;
+    background-color: white; /* Customize the background color if needed */
+    z-index: 1; /* Adjust the z-index as needed to ensure it remains above the content */
+  }
+  
+  .ql-container {
+    padding-top:50px;
+    background-color:#fff
+  }
+
+  ul{
+    list-style-type: disc;
+    padding-left: 25px;
+  }
+  
+
+}
