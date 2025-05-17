@@ -20,8 +20,12 @@ export const getComplaintById = async (id) => {
 };
 
 // Get all complaints
-export const getAllComplaints = async () => {
-  const res = await fetch(API_URL);
+export const getAllComplaints = async (params) => {
+  let url=API_URL;
+  if (params.length > 0) {
+    url += "?" + params.join("&");
+  }
+  const res = await fetch(url);
   return await res.json();
 };
 

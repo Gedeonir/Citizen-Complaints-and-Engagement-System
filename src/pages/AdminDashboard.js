@@ -9,13 +9,20 @@ const AdminDashboard = () => {
     const [error, setError] = useState("");
     const [open, setOpen] = useState(false);
     const [data, setData] = useState(null);
+    const [statusFilter, setStatusFilter] = useState("");
+    const [categoryFilter, setCategoryFilter] = useState("");
 
-    // Fetch complaints from backend
+
     const fetchComplaints = async () => {
         setLoading(true);
         setError("");
+        
+        const params = [];
+
+        if (statusFilter) params.push(`status=${statusFilter}`);
+        if (categoryFilter) params.push(`category=${categoryFilter}`);
         try {
-            const res = await getAllComplaints();
+            const res = await getAllComplaints(params);
             setComplaints(res);
         } catch (err) {
             setError(err.message || "Something went wrong");
@@ -25,7 +32,7 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         fetchComplaints();
-    }, []);
+    }, [statusFilter, categoryFilter]);
 
     // Handle status change
     const handleStatusChange = async (id, newStatus) => {
@@ -39,7 +46,6 @@ const AdminDashboard = () => {
                 body: JSON.stringify(ticket),
             })
 
-            // Update local state to reflect change immediately
             setComplaints((prev) =>
                 prev.map((c) => (c.id === id ? { ...c, status: newStatus } : c))
             );
@@ -65,6 +71,31 @@ const AdminDashboard = () => {
     return (
         <div className="max-w-5xl mx-auto p-6 mt-10 text-white">
             <h2 className="text-3xl font-bold mb-6">Admin Dashboard</h2>
+            <div className="flex gap-4 mb-4">
+                <select
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    value={statusFilter}
+                    className="bg-gray-700 text-white border border-gray-600 p-2 rounded"
+                >
+                    <option value="">All Statuses</option>
+                    <option>Submitted</option>
+                    <option>In Progress</option>
+                    <option>Resolved</option>
+                </select>
+
+                <select
+                    onChange={(e) => setCategoryFilter(e.target.value)}
+                    value={categoryFilter}
+                    className="bg-gray-700 text-white border border-gray-600 p-2 rounded"
+                >
+                    <option value="">All Categories</option>
+                    <option>Electricity</option>
+                    <option>Water</option>
+                    <option>Roads</option>
+                    <option>Education</option>
+                </select>
+            </div>
+
             <div className="overflow-x-auto bg-gray-800 shadow-md rounded-xl">
                 <table className="min-w-full table-auto border-collapse">
                     <thead>
@@ -74,9 +105,17 @@ const AdminDashboard = () => {
                             <th className="p-3">Category</th>
                             <th className="p-3">Status</th>
                             <th className="p-3">Change status</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
+                        {complaints.length === 0 && (
+                            <tr>
+                                <td colSpan="5" className="p-3 text-center">
+                                    No complaints found
+                                </td>
+                            </tr>
+                        )}
                         {complaints.map((complaint) => (
                             <tr
                                 key={complaint.id}
@@ -105,7 +144,7 @@ const AdminDashboard = () => {
                 </table>
             </div>
             {data && (
-                <div onClick={()=>setData(null)} className="absolute bg-slate-950 bg-opacity-50 inset-0 flex items-center justify-center z-50">
+                <div onClick={() => setData(null)} className="absolute bg-slate-950 bg-opacity-50 inset-0 flex items-center justify-center z-50">
                     <div className="p-4 bg-gray-700 border border-gray-600 rounded space-y-2">
                         <h3 className="text-xl font-bold text-blue-400 mb-2">Complaint Details</h3>
 
@@ -117,9 +156,9 @@ const AdminDashboard = () => {
                         <p><strong>Email:</strong> {data.email}</p>
                         <p><strong>Contact:</strong> {data.contact}</p>
                         <p><strong>Location:</strong> {data.province}, {data.district}, {data.sector}, {data.cell}, {data.village}</p>
-                        <p className="italic"><strong>Description</strong> <br/>{data.description}</p>
+                        <p className="italic"><strong>Description</strong> <br />{data.description}</p>
 
-                    
+
                     </div>
                 </div>
             )}

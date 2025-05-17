@@ -6,6 +6,7 @@ import TicketStatus from "./components/TicketStatus";
 import AdminLogin from "./components/SignIn";
 import AdminDashboard from "./pages/AdminDashboard";
 import { useState } from "react";
+import AdminAnalytics from './pages/Analytics';
 
 const AppRoutes = (prop) => {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
@@ -43,12 +44,27 @@ const AppRoutes = (prop) => {
               </Link>
             </>
             :
-            <button
-              onClick={() => setIsAdminLoggedIn(false)}
-              className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 mt-4"
-            >
-              Logout
-            </button>
+            <>
+              <Link
+                to="/admin"
+                className="text-gray-300 hover:text-white underline-offset-4 hover:underline transition"
+              >
+                Home
+              </Link>
+              <Link
+                to="/analytics"
+                className="text-gray-300 hover:text-white underline-offset-4 hover:underline transition"
+              >
+                Analytics
+              </Link>
+              <button
+                onClick={() => setIsAdminLoggedIn(false)}
+                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 mt-4"
+              >
+                Logout
+              </button>
+            </>
+
           }
         </div>
       </nav>
@@ -62,6 +78,14 @@ const AppRoutes = (prop) => {
             element={
               isAdminLoggedIn
                 ? <AdminDashboard />
+                : <AdminLogin onLogin={() => setIsAdminLoggedIn(true)} />
+            }
+          />
+          <Route
+            path="/analytics"
+            element={
+              isAdminLoggedIn
+                ? <AdminAnalytics />
                 : <AdminLogin onLogin={() => setIsAdminLoggedIn(true)} />
             }
           />
